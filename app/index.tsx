@@ -1,4 +1,4 @@
-import { FlatList, Text, View } from "react-native";
+import { FlatList, KeyboardAvoidingView, Platform, Text, View } from "react-native";
 import CheckoutSummary, { Header, ProductCard } from "./_components";
 import { products as initialProducts } from "@/data/test";
 import { useState, useCallback } from "react";
@@ -24,7 +24,11 @@ export default function Index() {
   const vat = subtotal * vatRate;
 
   return (
-    <View style={{ flex: 1 }}>
+    <KeyboardAvoidingView
+      style={{ flex: 1 }}
+      behavior={Platform.OS === "ios" ? "padding" : "height"}
+      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
+    >
       <Header />
 
       {/* cart */}
@@ -62,6 +66,6 @@ export default function Index() {
         subtotal={subtotal}
         vat={vat}
       />
-    </View>
+    </KeyboardAvoidingView>
   );
 }

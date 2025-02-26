@@ -14,7 +14,7 @@ export const products = [
     {
         name: 'Product 1',
         maxDeliveryTime: '2 days',
-        price: 2000,
+        price: 1200,
         image: require('@/assets/images/image.png'),
         count: 1
     },
@@ -23,13 +23,13 @@ export const products = [
         maxDeliveryTime: '3 days',
         price: 3500,
         image: require('@/assets/images/image.png'),
-        count: 2
+        count: 1
     },
     {
         name: 'Product 3',
         maxDeliveryTime: '4 days',
-        price: 40,
+        price: 1800,
         image: require('@/assets/images/image.png'),
-        count: 3
+        count: 1
     }
 ]

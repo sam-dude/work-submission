@@ -173,8 +173,10 @@ const styles = StyleSheet.create({
     height: 44,
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: '#ddd',
+    backgroundColor: 'transparent',
     borderRadius: 22,
+    borderWidth: 1,
+    borderColor: '#ddd',
   },
   disabledButton: {
     backgroundColor: '#eee',
