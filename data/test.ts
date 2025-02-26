@@ -12,7 +12,7 @@
 
 export const products = [
     {
-        name: 'Product 1',
+        name: 'Product Real estate e-flyer design',
         maxDeliveryTime: '2 days',
         price: 1200,
         image: require('@/assets/images/image.png'),
