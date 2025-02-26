@@ -8,27 +8,16 @@ import {
   View,
   GestureResponderEvent,
 } from "react-native";
-import { ProductCardProps, CheckoutSummaryProps } from "../_types/types";
+import { ProductCardProps, CheckoutSummaryProps } from "../app/_types/types";
 import { useState, useCallback } from "react";
 
 export const Header = () => {
   return (
-    <View
-      className="px-5 py-[14px] flex-row justify-between items-center border-b border-gray-200"
-      style={{
-        backgroundColor: "white",
-        shadowColor: "#455971",
-        shadowOffset: { width: 0, height: 4 },
-        shadowOpacity: 0.15,
-        shadowRadius: 2,
-        elevation: 2,
-      }}
-    >
+    <View style={styles.header}>
       <View>{icons.WorkiManLogo()}</View>
-
       <Image
         source={require("@/assets/images/profile.png")}
-        style={{ width: 40, height: 40, borderRadius: 20 }}
+        style={styles.profileImage}
       />
     </View>
   );
@@ -56,11 +45,11 @@ export const ProductCard = ({
 
   return (
     <View style={styles.productCard}>
-      <View className="flex-row items-center gap-3 flex-1">
+      <View style={styles.productContent}>
         <Image source={image} style={styles.productImage} />
         <View>
-          <Text className="text-[22px] font-bold">{name}</Text>
-          <Text className="text-gray-500">
+          <Text style={styles.productName} numberOfLines={2}>{name}</Text>
+          <Text style={styles.deliveryTime}>
             Max Delivery Time: {maxDeliveryTime}
           </Text>
           <View>
@@ -150,17 +139,50 @@ const CheckoutSummary = ({ subtotal, vat }: CheckoutSummaryProps) => {
 };
 
 const styles = StyleSheet.create({
+  header: {
+    flexDirection: 'row',
+    justifyContent: 'space-between',
+    alignItems: 'center',
+    paddingHorizontal: 20,
+    paddingVertical: 14,
+    borderBottomWidth: 1,
+    borderBottomColor: '#f3f3f3',
+    backgroundColor: 'white',
+    shadowColor: "#455971",
+    shadowOffset: { width: 0, height: 4 },
+    shadowOpacity: 0.15,
+    shadowRadius: 2,
+    elevation: 2,
+  },
+  profileImage: {
+    width: 40,
+    height: 40,
+    borderRadius: 20,
+  },
   productCard: {
     flexDirection: 'row',
     justifyContent: 'space-between',
     width: '100%',
     paddingVertical: 10,
   },
+  productContent: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    gap: 8,
+    flex: 1,
+  },
   productImage: {
     width: 120,
     height: 100,
     borderRadius: 10,
     marginRight: 10,
+  },
+  productName: {
+    fontSize: 18,
+    fontWeight: 'bold',
+  },
+  deliveryTime: {
+    color: '#6b7280',
   },
   quantityContainer: {
     flexDirection: 'row',
@@ -174,9 +196,9 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     backgroundColor: 'transparent',
-    borderRadius: 22,
     borderWidth: 1,
     borderColor: '#ddd',
+    borderRadius: 22,
   },
   disabledButton: {
     backgroundColor: '#eee',
@@ -261,7 +283,7 @@ const styles = StyleSheet.create({
     alignItems: 'center',
   },
   checkoutButtonText: {
-    color: 'black',
+    color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
   },

@@ -1,22 +1,38 @@
-import { Stack } from "expo-router";
-import "../global.css";
-import { StatusBar } from "react-native";
-import { SafeAreaProvider } from "react-native-safe-area-context";
+import { Tabs } from 'expo-router';
+import { icons } from "@/assets/icon";
 
 export default function RootLayout() {
   return (
-    <SafeAreaProvider>
-      <StatusBar barStyle="dark-content" />
-      <Stack
-        screenOptions={{
-          headerShown: false,
-          contentStyle: { backgroundColor: "white" },
+    <Tabs 
+      screenOptions={{
+        headerShown: false,
+        tabBarStyle: {
+          backgroundColor: 'white',
+          borderTopWidth: 1,
+          borderTopColor: '#f3f3f3',
+        }
+      }}
+    >
+      <Tabs.Screen
+        name="index"
+        options={{
+          title: 'Home',
+          tabBarIcon: () => icons.Logo(),
+          tabBarLabelStyle: {
+            fontSize: 12
+          }
         }}
-      >
-        <Stack.Screen 
-          name="index" 
-        />
-      </Stack>
-    </SafeAreaProvider>
+      />
+      <Tabs.Screen
+        name="cart"
+        options={{
+          title: 'Cart',
+          tabBarIcon: () => icons.Chart(),
+          tabBarLabelStyle: {
+            fontSize: 12
+          }
+        }}
+      />
+    </Tabs>
   );
 }

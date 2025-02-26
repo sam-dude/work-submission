@@ -1,71 +1,46 @@
-import { FlatList, KeyboardAvoidingView, Platform, Text, View } from "react-native";
-import CheckoutSummary, { Header, ProductCard } from "./_components";
-import { products as initialProducts } from "@/data/test";
-import { useState, useCallback } from "react";
+import { View, Text, StyleSheet, TouchableOpacity } from "react-native";
+import { Link } from "expo-router";
 
-export default function Index() {
-  const [products, setProducts] = useState(initialProducts);
-
-  const handleQuantityChange = useCallback((productName: string, change: 1 | -1) => {
-    setProducts(currentProducts => 
-      currentProducts.map(product => 
-        product.name === productName 
-          ? { 
-              ...product, 
-              count: Math.max(0, product.count + change)
-            }
-          : product
-      )
-    );
-  }, []);
-
-  const subtotal = products.reduce((acc, product) => acc + (product.price * product.count), 0);
-  const vatRate = 0.05;
-  const vat = subtotal * vatRate;
-
+export default function HomeScreen() {
   return (
-    <KeyboardAvoidingView
-      style={{ flex: 1 }}
-      behavior={Platform.OS === "ios" ? "padding" : "height"}
-      keyboardVerticalOffset={Platform.OS === "ios" ? 64 : 0}
-    >
-      <Header />
-
-      {/* cart */}
-      <View className="px-5 py-5 pt-8" style={{}}>
-        <Text className="text-4xl">
-          <Text className="font-bold">My</Text> cart
-        </Text>
-
-        {/* list of products */}
-        <FlatList
-          data={products}
-          renderItem={({ item }) => (
-            <ProductCard
-              key={item.name}
-              name={item.name}
-              maxDeliveryTime={item.maxDeliveryTime}
-              price={item.price}
-              image={item.image}
-              count={item.count}
-              onQuantityChange={(change) => handleQuantityChange(item.name, change)}
-            />
-          )}
-          keyExtractor={(item) => item.name}
-          contentContainerStyle={{
-            borderBottomWidth: 2,
-            borderBottomColor: "#f3f3f3",
-            paddingBottom: 20,
-            paddingTop: 20,
-          }}
-        />
-      </View>
-
-      {/* Checkout Summary */}
-      <CheckoutSummary 
-        subtotal={subtotal}
-        vat={vat}
-      />
-    </KeyboardAvoidingView>
+    <View style={styles.container}>
+      <Text style={styles.title}>Welcome to Workiman</Text>
+      <Link href="/cart" asChild>
+        <TouchableOpacity style={styles.button}>
+          <Text style={styles.buttonText}>View Cart</Text>
+        </TouchableOpacity>
+      </Link>
+    </View>
   );
 }
+
+const styles = StyleSheet.create({
+  container: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+    backgroundColor: '#fff',
+  },
+  title: {
+    fontSize: 32,
+    marginBottom: 24,
+    fontWeight: '600',
+    textAlign: 'center',
+  },
+  button: {
+    backgroundColor: '#0f75bd',
+    paddingVertical: 12,
+    paddingHorizontal: 24,
+    borderRadius: 30,
+    elevation: 2,
+    shadowColor: '#000',
+    shadowOffset: { width: 0, height: 2 },
+    shadowOpacity: 0.25,
+    shadowRadius: 3.84,
+  },
+  buttonText: {
+    color: 'white',
+    fontSize: 18,
+    fontWeight: '500',
+  },
+});
