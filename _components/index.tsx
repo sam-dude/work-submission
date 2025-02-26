@@ -47,7 +47,7 @@ export const ProductCard = ({
     <View style={styles.productCard}>
       <View style={styles.productContent}>
         <Image source={image} style={styles.productImage} />
-        <View>
+        <View style={{ flex: 1 }}>
           <Text style={styles.productName} numberOfLines={2}>{name}</Text>
           <Text style={styles.deliveryTime}>
             Max Delivery Time: {maxDeliveryTime}
